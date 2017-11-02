@@ -1,3 +1,9 @@
+Usefull commands to run local
+
+taskkill //PID 8032 //F
+netstat -ano | grep 9000
+heroku local web -f Procfile.windows
+
 # scala/play-getting-started
 
 A barebones Scala app (using the Play framework), which can easily be deployed to Heroku.  
