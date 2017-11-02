@@ -1,4 +1,4 @@
-name := """play-getting-started"""
+name := """give-the-ball"""
 
 version := "1.0-SNAPSHOT"
 
