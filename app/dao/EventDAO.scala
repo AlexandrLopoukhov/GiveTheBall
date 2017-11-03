@@ -6,9 +6,11 @@ import model.Event
 import play.api.db.DB
 import play.api.Play.current
 
+import scala.collection.mutable
+
 object EventDAO {
-  def getEvents(): List[Event] = {
-    var out: List[Event] = List[Event]()
+  def getEvents(): mutable.MutableList[Event] = {
+    var out: mutable.MutableList[Event] = mutable.MutableList[Event]()
 
     val conn = DB.getConnection()
     try {
@@ -34,7 +36,7 @@ object EventDAO {
                                     ON     e.picture_id = p.id""")
 
       while (
-        rs.next
+        rs.next()
       ) {
         val id: Long = rs.getLong("id")
         val title: String = rs.getString("name")
@@ -45,7 +47,7 @@ object EventDAO {
         val `type`: String = rs.getString("type")
         val adress: String = rs.getString("demands")
         val event: Event = new Event(id, title, `type`, date.toLocalDateTime.toString, allPeopleNumber, bookedPeopleNumber, adress, description)
-        out ::: List(event)
+        out.+=(event)
 
       }
       out
