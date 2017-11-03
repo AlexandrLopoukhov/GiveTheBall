@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET     /db                         controllers.Application.db
 GET     /faketest                   controllers.Application.faketest
 GET     /fake                       @controllers.FakeController.fake
+GET     /events                     @controllers.EventController.events
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
