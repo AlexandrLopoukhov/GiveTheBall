@@ -14,5 +14,4 @@ class EventController  extends Controller {
     val events: EventList =new EventList(EventManager.getEvents())
     Ok(Json.toJson(events))
   }
-
 }

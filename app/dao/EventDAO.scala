@@ -1,18 +1,14 @@
 package dao
 
 import java.sql.Timestamp
-
 import model.Event
 import play.api.db.DB
 import play.api.Play.current
-
 import scala.collection.mutable
 
 object EventDAO {
   def getEvents(): List[Event] = {
     var out: mutable.MutableList[Event] = mutable.MutableList[Event]()
-
-
     val conn = DB.getConnection()
     try {
       val stmt = conn.createStatement
@@ -36,9 +32,7 @@ object EventDAO {
                                     JOIN   picture as p
                                     ON     e.picture_id = p.id""")
 
-      while (
-        rs.next()
-      ) {
+      while (rs.next()) {
         val id: Long = rs.getLong("id")
         val title: String = rs.getString("name")
         val description: String = rs.getString("description")
@@ -47,18 +41,13 @@ object EventDAO {
         val bookedPeopleNumber: Int = rs.getInt("max_num_particip")
         val `type`: String = rs.getString("type")
         val adress: String = rs.getString("demands")
-        val event: Event = new Event(id, title, `type`, date.toLocalDateTime.toString, allPeopleNumber, bookedPeopleNumber, adress, description)
-        out.+=(event)
-
+        val event: Event = Event(id, title, `type`, date.toLocalDateTime.toString, allPeopleNumber, bookedPeopleNumber, adress, description)
+        out += event
       }
       val output: List[Event] = out.toList
-      return output
-
-
+      output
     } finally {
-
       conn.close()
     }
   }
-
 }
