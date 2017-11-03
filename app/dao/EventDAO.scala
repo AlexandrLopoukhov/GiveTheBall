@@ -9,8 +9,9 @@ import play.api.Play.current
 import scala.collection.mutable
 
 object EventDAO {
-  def getEvents(): mutable.MutableList[Event] = {
+  def getEvents(): List[Event] = {
     var out: mutable.MutableList[Event] = mutable.MutableList[Event]()
+
 
     val conn = DB.getConnection()
     try {
@@ -50,7 +51,8 @@ object EventDAO {
         out.+=(event)
 
       }
-      out
+      val output: List[Event] = out.toList
+      return output
 
 
     } finally {
